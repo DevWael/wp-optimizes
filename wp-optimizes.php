@@ -10,7 +10,8 @@
 
 include plugin_dir_path( __FILE__ ) . 'core/helper_functions.php';
 
-add_action( 'init', 'wpo_stop_heartbeat', 1 );
+add_action( 'wp_enqueue_scripts', 'wpo_stop_heartbeat', 100 );
+add_action( 'admin_enqueue_scripts', 'wpo_stop_heartbeat', 100 );
 function wpo_stop_heartbeat() {
 	wp_deregister_script( 'heartbeat' );
 }
