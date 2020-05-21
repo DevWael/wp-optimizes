@@ -24,21 +24,21 @@ function wpo_unset_setting() {
 	$config_file_content = wpo_file_read( $config_file_Name );
 	$config_file_content = wpo_add_const( 0, 'DISABLE_WP_CRON', $config_file_content );
 
-	if ( wpo_file_write( $config_file_content, $config_file_Name ) ) { //done
-
-	} else { //error happened
-
+	if ( wpo_file_write( $config_file_content, $config_file_Name ) ) {
+		//done
+	} else {
+		//error happened
 	}
 }
 
 /**
  * modify content of wp-config.php file and add debug variable
  *
- * @param type $option
- * @param type $define
- * @param type $config_file_content
+ * @param string $option
+ * @param string $define
+ * @param string $config_file_content
  *
- * @return type
+ * @return string
  */
 function wpo_add_const( $option, $define, $config_file_content ) {
 	if ( $option == 1 ) {
@@ -70,15 +70,15 @@ function wpo_file_read( $config_file_Name ) {
 	$filePath = get_home_path() . $config_file_Name;
 	if ( file_exists( $filePath ) ) {
 		$file     = fopen( $filePath, "r" );
-		$responce = '';
-		fseek( $file, - 1048576, SEEK_END );
+		$response = '';
+		fseek( $file, - 104857600, SEEK_END );
 		while ( ! feof( $file ) ) {
-			$responce .= fgets( $file );
+			$response .= fgets( $file );
 		}
 
 		fclose( $file );
 
-		return $responce;
+		return $response;
 	}
 
 	return false;
